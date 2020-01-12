@@ -52,8 +52,8 @@ java -jar target\lowfare-flights-search-service-0.0.1.jar
 ```
 Open your browser on ```http://localhost:8088/``` to see the application.
 
-
- 
+Application in action:
+![Alt text](./in_action.jpg?raw=true "Optional Title")
 
 ###### Notes
 * [npm.cmd](./lowfare-flights-search-client/npm.cmd) and [ng.cmd](./lowfare-flights-search-client/ng.cmd) are  wrapper scripts to run local node and angular cli with correct paths 
