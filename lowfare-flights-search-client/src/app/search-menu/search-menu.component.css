@@ -1,0 +1,16 @@
+.lf-custom-incrementer  {
+  width: 5em;
+}
+
+.lf-custom-input {
+  height: 35px;
+}
+
+.lf-custom-switch{
+  align-self: flex-end;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  opacity: 1;
+}
