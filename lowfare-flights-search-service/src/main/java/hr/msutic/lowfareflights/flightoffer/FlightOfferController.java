@@ -2,7 +2,6 @@ package hr.msutic.lowfareflights.flightoffer;
 
 import com.amadeus.exceptions.ResponseException;
 import hr.msutic.lowfareflights.common.ServiceResult;
-import hr.msutic.lowfareflights.currency.Currency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -33,12 +32,11 @@ public class FlightOfferController {
                                                       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate returnDate,
                                                       @RequestParam(required = false) String adults,
                                                       @RequestParam(required = false) String currency) throws ResponseException {
-    log.info("{}, {}, {}, {}, {}, {}", origin, destination, departureDate, returnDate, adults, currency);
-//    Currency c = currency == null ? new Currency("EUR") : new Currency(currency);
+    log.info("origin={}, destination={}, departureDate={}, returnDate={}, adults={}, currency={}"
+      , origin, destination, departureDate, returnDate, adults, currency);
     String c = StringUtils.isBlank(currency) ? "EUR" : currency;
-    int adultsP = adults == null ? 1 : Integer.parseInt(adults);
+    int adultsP = (adults == null || adults.equals("0") ) ? 1 : Integer.parseInt(adults);
     return flightOfferService.searchFlightOffers(new SearchCommand(origin, destination, departureDate, returnDate, adultsP, c));
   }
-
 
 }

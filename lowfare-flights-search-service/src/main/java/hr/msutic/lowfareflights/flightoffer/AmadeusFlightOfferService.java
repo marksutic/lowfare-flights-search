@@ -39,8 +39,8 @@ public class AmadeusFlightOfferService {
     }
     params.and("adults", searchCommand.getAdults());
     params.and("currency", searchCommand.getCurrency());
+    log.debug("Calling amadeus api with params={}", params);
     com.amadeus.resources.FlightOffer[] flightOffers = amadeus.shopping.flightOffers.get(params);
-                   log.info("actual call");
 
     return Arrays.stream(flightOffers)
                  .map(f -> {
