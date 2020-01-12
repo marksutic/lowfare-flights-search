@@ -1,14 +1,17 @@
 package hr.msutic.lowfareflights.airline;
 
 import com.amadeus.Amadeus;
+import com.amadeus.exceptions.ResponseException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author c214223
@@ -35,20 +38,20 @@ public class AirlineService {
   }
 
   private Map<String, Airline> loadAirlines() {
-//    try {
-//      com.amadeus.resources.Airline[] airs = this.amadeus.referenceData.airlines.get();
-//      return Arrays.stream(airs)
-//                   .map(airline -> Airline.builder()
-//                                          .iataCode(airline.getIataCode())
-//                                          .businessName(airline.getBusinessName())
-//                                          .commonName(airline.getCommonName())
-//                                          .type(airline.getType())
-//                                          .build())
-//                   .collect(Collectors.toMap(Airline::getIataCode, airline -> airline));
-//    } catch (ResponseException e) {
-//      log.error("ResponseException", e);
-    return Collections.emptyMap();
-//    }
+    try {
+      com.amadeus.resources.Airline[] airs = this.amadeus.referenceData.airlines.get();
+      return Arrays.stream(airs)
+                   .map(airline -> Airline.builder()
+                                          .iataCode(airline.getIataCode())
+                                          .businessName(airline.getBusinessName())
+                                          .commonName(airline.getCommonName())
+                                          .type(airline.getType())
+                                          .build())
+                   .collect(Collectors.toMap(Airline::getIataCode, airline -> airline));
+    } catch (ResponseException e) {
+      log.error("ResponseException", e);
+      return Collections.emptyMap();
+    }
   }
 
 
